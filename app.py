@@ -90,11 +90,31 @@ def submit_time():
 
 @app.route("/leaderboard")
 def leaderboard():
-    with sqlite3.connect(DATABASE) as conn:
-        c = conn.cursor()
-        c.execute("SELECT username, time, status FROM results ORDER BY time ASC")
-        rows = c.fetchall()
-    return render_template("leaderboard.html", results=rows)
+    try:
+        with sqlite3.connect(DATABASE) as conn:
+            c = conn.cursor()
+            # Ensure table exists (safety check)
+            c.execute("""
+                CREATE TABLE IF NOT EXISTS results (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    username TEXT,
+                    password TEXT,
+                    time INTEGER,
+                    status TEXT
+                )
+            """)
+            conn.commit()
+
+            # Fetch leaderboard data
+            c.execute("SELECT username, time, status FROM results ORDER BY time ASC")
+            rows = c.fetchall()
+
+        return render_template("leaderboard.html", results=rows)
+
+    except Exception as e:
+        # Debug info will appear in browser
+        return f"<h2 style='color:red;'>Error loading leaderboard:</h2><pre>{e}</pre>", 500
+
 if __name__ == "__main__":
     init_db()
     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 8000)), debug=True)
