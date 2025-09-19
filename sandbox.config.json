@@ -1,6 +1,6 @@
 {
   "container": {
-    "startCommand": "gunicorn -k sync -b 0.0.0.0:8000 app:app --forwarded-allow-ips=*"
+    "startCommand": "python app.py"
   },
   "ports": [
     {
@@ -9,4 +9,5 @@
     }
   ]
 }
+
 
