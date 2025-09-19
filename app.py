@@ -95,8 +95,7 @@ def leaderboard():
         c.execute("SELECT username, time, status FROM results ORDER BY time ASC")
         rows = c.fetchall()
     return render_template("leaderboard.html", results=rows)
-
 if __name__ == "__main__":
     init_db()
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 8000)), debug=True)
 
