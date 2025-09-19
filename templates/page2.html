@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Sudoku Game</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='game.css') }}">
+</head>
+<body >
+  <h1>Sudoku (9×9)</h1>
+  <div id="timer">Time: 0s</div>
+  <div id="board" style="text-align:center;"></div>
+
+  <div style="text-align:center; margin-top:12px;">
+    <button id="submitBtn">Submit</button>
+    <button id="passBtn">Pass</button>
+    <button onclick="location.href='/leaderboard'">Results</button>
+    <div id="message" style="margin-top:10px; color:darkred;"></div>
+  </div>
+
+  <!-- Hidden script with puzzle & solution injected -->
+  <script id="game-data" type="application/json">
+    {
+      "puzzle": "{{ puzzle }}",
+      "solution": "{{ solution }}"
+    }
+  </script>
+
+  <!-- Game logic -->
+  <script src="{{ url_for('static', filename='game.js') }}"></script>
+</body>
+</html>

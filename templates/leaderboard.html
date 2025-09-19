@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Leaderboard</title>
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; background:radial-gradient(red,black) ; }
+    table { margin: 20px auto; border-collapse: collapse; }
+    th, td { border: 1px solid #333; padding: 8px 15px; }
+    th { background: #444; color: #fff; }
+  </style>
+</head>
+<body>
+  <h2>Sudoku Leaderboard</h2>
+  <table>
+    <tr><th>Username</th><th>Time (s)</th><th>Status</th></tr>
+    {% for row in results %}
+      <tr>
+        <td>{{ row[0] }}</td>
+        <td>{{ row[1] }}</td>
+        <td>{{ row[2] }}</td>
+      </tr>
+    {% endfor %}
+  </table>
+</body>
+</html>
