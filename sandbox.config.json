@@ -1,5 +1,11 @@
 {
   "container": {
-    "startCommand": "gunicorn -b 0.0.0.0:5000 app:app"
-  }
+    "startCommand": "gunicorn -b 0.0.0.0:8000 app:app"
+  },
+  "ports": [
+    {
+      "port": 8000,
+      "onOpen": "open-preview"
+    }
+  ]
 }
